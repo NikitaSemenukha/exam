@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  web:
+    image: php:7.4-apache
+    container_name: symfony-app
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+
+  db:
+    image: mysql:5.7
+    container_name: symfony-db
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: symfony
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
